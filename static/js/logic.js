@@ -39,7 +39,6 @@ let airportData = "https://raw.githubusercontent.com/AnnaKDay/Mapping-Earthquake
 d3.json(airportData).then(function(data) {
     console.log(data);
     L.geoJSON(data, {
-        
         // We turn each feature into a marker on the map.
         onEachFeature: function(feature, layer) {
         layer.bindPopup("<h1>" + "Airport Code: " + feature.properties.faa + "</h2>" + "<h3>"+ "Airport Name: " + feature.properties.name + "</h3>");
