@@ -7,22 +7,29 @@ console.log("working");
 // Create the map object with a center and zoom level.
 let map = L.map("mapid", {
     center: [
-      37.5, -122.5
+      44.0, -80.0
     ],
-    zoom: 10
+    zoom: 2
   });
 
 
 // import json data
-let x = ""
+let torontoData = "https://raw.githubusercontent.com/AnnaKDay/Mapping-Earthquakes/Mapping_GeoJSON_Linestrings/Practice/Mapping_GeoJSON_Linestrings/torontoRoutes.json"
+
+// Create a style for the lines.
+let myStyle = {
+    color: "#ffffa1",
+    weight: 2
+}
 
 // Grabbing our GeoJSON data.
-d3.json(airportData).then(function(data) {
+d3.json(torontoData).then(function(data) {
     console.log(data);
     L.geoJSON(data, {
+        style: myStyle,
         // We turn each feature into a marker on the map.
         onEachFeature: function(feature, layer) {
-        layer.bindPopup("<h1>" + " " +  + "</h2>" + "<h3>"+ " " +  + "</h3>");
+        layer.bindPopup("<h1>" + "Airline: " + feature.properties.airline + "</h2>" + "<h3>"+ "Airline ID " + feature.properties.airline_id + "</h3>");
         }
     }).addTo(map);
 });
@@ -36,4 +43,4 @@ attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap
 });
 
 // Then we add our 'graymap' tile layer to the map.
-streets.addTo(map);
+light.addTo(map);
