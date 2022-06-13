@@ -1,5 +1,5 @@
 # Mapping-Earthquakes
 JS and APIs to map earthquakes around the world
 
-# Note to Grader
-- accidentally submitted and don't know how to unsubmit, challenge will be a little late
+# Overview
+- Leaflet and Mapbox were used to create an interactive mapping of earthquakes from 2002, tectonic plate locations, and major earthquakes (timeline not specified). The following are images that showcase the results.
