@@ -37,13 +37,36 @@ let earthquakeData = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/
 
 // Grabbing our GeoJSON data.
 d3.json(earthquakeData).then(function(data) {
+  // This function returns the style data for each of the earthquakes we plot on
+// the map. We pass the magnitude of the earthquake into a function
+// to calculate the radius.
+  function styleInfo(feature) {
+    return {
+      opacity: 1,
+      fillOpacity: 1,
+      fillColor: "#ffae42",
+      color: "#000000",
+      radius: feature.properties.mag * 4,
+      stroke: true,
+      weight: 0.5
+    };
+  }
     console.log(data);
-    L.geoJSON(data, {
-        // We turn each feature into a marker on the map.
-        onEachFeature: function(feature, layer) {
-        layer.bindPopup("<h1>" + "" +  + "</h2>" + "<h3>"+ " " +  + "</h3>");
-        }
-    }).addTo(map);
+
+  L.geoJSON(data, {
+      // We turn each feature into a marker on the map.
+      onEachFeature: function(feature, layer) { 
+      layer.bindPopup("<h1>" + "" +  + "</h2>" + "<h3>"+ " " +  + "</h3>");
+      },
+
+      // changed markers to circle markers
+      pointToLayer: function(feature, latlng) {
+        return L.circleMarker(latlng);
+      },
+
+      //stylized the markers
+      style: styleInfo
+  }).addTo(map);
 });
 
 
